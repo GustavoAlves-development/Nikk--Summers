@@ -1,0 +1,42 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@1,700;1,800&family=Inter:wght@800;900&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; box-sizing: border-box; }
+  html, body { width: 500px; height: 500px; overflow: hidden; background: #0d0609; }
+  .art {
+    position: relative; width: 500px; height: 500px;
+    background: url(../img/p8.png) center -215px / 500px auto no-repeat;
+  }
+  .art::after {
+    content: ""; position: absolute; inset: 0;
+    background:
+      radial-gradient(circle at 50% 110%, rgba(255,61,127,.35), transparent 55%),
+      linear-gradient(180deg, transparent 58%, rgba(13,6,9,.85) 82%, #0d0609 100%);
+  }
+  .badge {
+    position: absolute; top: 18px; left: 18px; z-index: 2;
+    font: 900 20px/1 Inter, sans-serif; color: #fff;
+    background: #ff3d7f; padding: 9px 12px; border-radius: 10px;
+    box-shadow: 0 4px 18px rgba(255,61,127,.6);
+  }
+  .price {
+    position: absolute; top: 18px; right: 18px; z-index: 2;
+    font: 900 22px/1 Inter, sans-serif; color: #0d0609;
+    background: #fff; padding: 9px 13px; border-radius: 10px;
+  }
+  .title {
+    position: absolute; left: 0; right: 0; bottom: 20px; z-index: 2;
+    text-align: center; font-family: "Playfair Display", serif; font-style: italic;
+  }
+  .title .n { display: block; font-weight: 700; font-size: 34px; color: #fff; letter-spacing: .12em; }
+  .title .u {
+    display: block; font-weight: 800; font-size: 58px; line-height: .95; color: #ff3d7f;
+    text-shadow: 0 0 24px rgba(255,61,127,.7), 0 3px 0 #7a0f36;
+  }
+</style></head>
+<body><div class="art">
+  <span class="badge">18+</span>
+  <span class="price">$19</span>
+  <div class="title"><span class="n">NIKKI</span><span class="u">UNCENSORED</span></div>
+</div></body></html>
