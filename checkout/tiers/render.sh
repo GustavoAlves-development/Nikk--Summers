@@ -15,3 +15,4 @@ shot 1200,400 fully-naked-banner-1200x400.png "banner.html?i1=p2.png&y1=-90&i2=p
 shot 500,500  tits-out-capa-sem-preco.png     "cover.html?img=p3.png&y=-200&b=330&t=TITS%20OUT"
 # comparação "você tem × está perdendo" (página de upsell Tits Out)
 shot 800,600  tits-out-comparacao-800x600.png "compare.html"
+shot 800,600  fully-naked-comparacao-800x600.png "compare.html?l=p7.png&ly=-40&r=p2.png&ry=-40&b=240&t=Fully%20Naked"

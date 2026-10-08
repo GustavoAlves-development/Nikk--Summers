@@ -1,5 +1,5 @@
 <!doctype html>
-<!-- Imagem "você tem × você está perdendo" (800x600) da página de upsell Tits Out -->
+<!-- Imagem "você tem × você está perdendo" (800x600) das páginas de upsell. Parâmetros: l, ly, r, ry (imagens e offsets), b (início do blur), t (título) -->
 <html><head><meta charset="utf-8">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@1,800&family=Inter:wght@800;900&display=swap" rel="stylesheet">
 <style>
@@ -32,8 +32,17 @@
            box-shadow: 0 6px 24px rgba(0,0,0,.6), 0 0 0 6px rgba(255,61,127,.5); }
 </style></head>
 <body><div class="art">
-  <div class="side have"><span class="pill">✓ YOU HAVE THIS</span><div class="cap"><b>Lingerie teasing</b></div></div>
-  <div class="side miss"><span class="pill">🔒 YOU'RE MISSING THIS</span><div class="veil"></div>
-    <div class="cap"><div class="lock">🔒</div><span class="t">Tits Out</span><small>TAP "YES" TO UNLOCK</small></div></div>
+  <div class="side have" id="l"><span class="pill">✓ YOU HAVE THIS</span><div class="cap"><b>Lingerie teasing</b></div></div>
+  <div class="side miss" id="r"><span class="pill">🔒 YOU'RE MISSING THIS</span><div class="veil" id="v"></div>
+    <div class="cap"><div class="lock">🔒</div><span class="t" id="t">Tits Out</span><small>TAP "YES" TO UNLOCK</small></div></div>
   <div class="arrow">→</div>
-</div></body></html>
+</div>
+<script>
+  var q = new URLSearchParams(location.search), $ = function (id) { return document.getElementById(id); };
+  if (q.get("l")) $("l").style.backgroundImage = "url(../../img/" + q.get("l") + ")";
+  if (q.get("ly")) $("l").style.backgroundPosition = "center " + q.get("ly") + "px";
+  if (q.get("r")) $("r").style.backgroundImage = "url(../../img/" + q.get("r") + ")";
+  if (q.get("ry")) $("r").style.backgroundPosition = "center " + q.get("ry") + "px";
+  if (q.get("b")) $("v").style.top = q.get("b") + "px";
+  if (q.get("t")) $("t").textContent = q.get("t");
+</script></body></html>
