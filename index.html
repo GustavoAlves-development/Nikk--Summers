@@ -467,7 +467,11 @@
         return true;
       }
       if (!hookVturb()) {
-        var tries = 0, t = setInterval(function () { if (hookVturb() || ++tries > 20) clearInterval(t); }, 500);
+        var tries = 0, t = setInterval(function () { 
+          if (hookVturb()) return clearInterval(t);
+          // sem embed da Vturb na página: mostra tudo pra página não ficar vazia
+          if (++tries > 20) { clearInterval(t); reveal(); }
+        }, 500);
       }
     })();
   </script>
