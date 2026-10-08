@@ -1,0 +1,42 @@
+<!doctype html>
+<!-- Progressão em 3 passos (800x600) da página de upsell Fully Naked: sensual → quase sem roupa → sem nada -->
+<html><head><meta charset="utf-8">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@1,800&family=Inter:wght@800;900&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; box-sizing: border-box; }
+  html, body { width: 800px; height: 600px; overflow: hidden; background: #0d0609; font-family: Inter, sans-serif; }
+  .art { position: relative; display: flex; gap: 6px; width: 800px; height: 600px; }
+  .step { position: relative; flex: 1; overflow: hidden; background: center 0 / 340px auto no-repeat; }
+  .s1 { background-image: url(../../img/p8.png); background-position: center -20px; }
+  .s2 { background-image: url(../../img/p9.png); background-position: center -10px; }
+  .s3 { background-image: url(../../img/p2.png); background-position: center -20px; flex: 1.15; }
+  .s1::after, .s2::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, transparent 55%, rgba(13,6,9,.9)); }
+  .veil {
+    position: absolute; left: 0; right: 0; top: 215px; bottom: 0;
+    backdrop-filter: blur(30px) saturate(1.2); -webkit-backdrop-filter: blur(30px);
+    background: linear-gradient(180deg, rgba(255,61,127,.4), rgba(13,6,9,.8) 70%, #0d0609);
+    border-top: 2px solid rgba(255,122,168,.7);
+  }
+  .num { position: absolute; top: 14px; left: 14px; z-index: 2; width: 34px; height: 34px; border-radius: 50%;
+         display: flex; align-items: center; justify-content: center; font: 900 17px/1 Inter, sans-serif; color: #fff;
+         background: rgba(13,6,9,.7); border: 2px solid rgba(255,255,255,.6); }
+  .s3 .num { background: #ff3d7f; border-color: #fff; }
+  .cap { position: absolute; left: 0; right: 0; bottom: 22px; z-index: 2; text-align: center; color: #fff; padding: 0 8px; }
+  .cap .t { display: block; font: italic 800 30px/1.05 "Playfair Display", serif; }
+  .cap .ok { display: inline-block; margin-top: 8px; font: 900 13px/1 Inter, sans-serif; letter-spacing: .1em; padding: 7px 11px; border-radius: 999px; background: #16a34a; }
+  .s3 .cap .lock { font-size: 50px; line-height: 1; filter: drop-shadow(0 4px 14px rgba(255,61,127,.8)); }
+  .s3 .cap .t { margin-top: 8px; font-size: 40px; color: #ff3d7f; text-shadow: 0 0 22px rgba(255,61,127,.7), 0 3px 0 #7a0f36; }
+  .s3 .cap .ok { background: #ff3d7f; box-shadow: 0 4px 18px rgba(255,61,127,.7); }
+  .arrow { position: absolute; top: 300px; z-index: 3; transform: translate(-50%, -50%);
+           width: 44px; height: 44px; border-radius: 50%; background: #fff; color: #ff3d7f;
+           display: flex; align-items: center; justify-content: center; font: 900 24px/1 Inter, sans-serif;
+           box-shadow: 0 6px 20px rgba(0,0,0,.6), 0 0 0 4px rgba(255,61,127,.5); }
+</style></head>
+<body><div class="art">
+  <div class="step s1"><span class="num">1</span><div class="cap"><span class="t">Sensual</span><span class="ok">✓ SEEN</span></div></div>
+  <div class="step s2"><span class="num">2</span><div class="cap"><span class="t">Barely covered</span><span class="ok">✓ SEEN</span></div></div>
+  <div class="step s3"><span class="num">3</span><div class="veil"></div>
+    <div class="cap"><div class="lock">🔒</div><span class="t">Nothing at all</span><span class="ok">TAP "YES" TO SEE</span></div></div>
+  <span class="arrow" style="left: 249px">→</span>
+  <span class="arrow" style="left: 504px">→</span>
+</div></body></html>
