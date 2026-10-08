@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Nikki Summers — Private Access</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- ============================================================
+       CONFIG — edite aqui
+       ============================================================ -->
+  <script>
+    window.PAGE_CONFIG = {
+      checkoutUrl: "https://SEU-CHECKOUT-AQUI.com",   // link do checkout
+      delaySeconds: 140,                              // segundo do vídeo em que a oferta aparece (2:20 = 140)
+      // Para testar sem esperar o vídeo: abra a página com ?nodelay no final da URL
+    };
+  </script>
+
+  <style>
+    :root {
+      --bg: #0b0709;
+      --bg-2: #140c10;
+      --card: #1b1015;
+      --line: #2e1c24;
+      --text: #f6eef1;
+      --muted: #b49ea8;
+      --rose: #ff3d7f;
+      --rose-2: #ff7aa8;
+      --gold: #f5c76b;
+      --green: #2fd67b;
+      --radius: 16px;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: radial-gradient(ellipse at top, #2a0f1c 0%, var(--bg) 55%) fixed, var(--bg);
+      color: var(--text);
+      font-family: "Inter", system-ui, sans-serif;
+      line-height: 1.55;
+      -webkit-font-smoothing: antialiased;
+    }
+    body.locked { overflow: hidden; }
+    .wrap { width: 100%; max-width: 640px; margin: 0 auto; padding: 0 16px; }
+    h1, h2, .serif { font-family: "Playfair Display", Georgia, serif; }
+
+    /* ---------- AGE GATE ---------- */
+    #age-gate {
+      position: fixed; inset: 0; z-index: 100;
+      background: rgba(8, 4, 6, .96); backdrop-filter: blur(14px);
+      display: flex; align-items: center; justify-content: center; padding: 16px;
+    }
+    #age-gate.hidden { display: none; }
+    .gate-box {
+      background: var(--card); border: 1px solid var(--line); border-radius: 20px;
+      padding: 32px 24px; max-width: 400px; width: 100%; text-align: center;
+    }
+    .gate-box .badge {
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 64px; height: 64px; border-radius: 50%;
+      border: 2px solid var(--rose); color: var(--rose);
+      font-weight: 800; font-size: 20px; margin-bottom: 16px;
+    }
+    .gate-box h2 { font-size: 24px; margin-bottom: 8px; }
+    .gate-box p { color: var(--muted); font-size: 14px; margin-bottom: 24px; }
+    .gate-box .btn { width: 100%; margin-bottom: 10px; }
+    .btn-ghost {
+      display: block; width: 100%; padding: 12px; background: none;
+      border: 1px solid var(--line); border-radius: 999px;
+      color: var(--muted); font: inherit; font-size: 14px; cursor: pointer;
+    }
+
+    /* ---------- TOP BAR ---------- */
+    .topbar {
+      background: linear-gradient(90deg, var(--rose), #c2185b);
+      text-align: center; font-size: 13px; font-weight: 600;
+      padding: 8px 16px; letter-spacing: .02em;
+    }
+    .topbar .dot {
+      display: inline-block; width: 8px; height: 8px; border-radius: 50%;
+      background: #fff; margin-right: 6px; animation: pulse 1.4s infinite;
+    }
+    @keyframes pulse { 0%,100% { opacity: 1 } 50% { opacity: .25 } }
+
+    /* ---------- HERO ---------- */
+    .hero { text-align: center; padding: 32px 0 20px; }
+    .eyebrow {
+      display: inline-block; font-size: 12px; font-weight: 700;
+      letter-spacing: .14em; text-transform: uppercase; color: var(--rose-2);
+      margin-bottom: 12px;
+    }
+    .hero h1 { font-size: clamp(28px, 7vw, 40px); line-height: 1.15; margin-bottom: 12px; }
+    .hero h1 em { color: var(--rose); font-style: italic; }
+    .hero p { color: var(--muted); font-size: 16px; }
+    .hero p strong { color: var(--text); }
+
+    /* ---------- VIDEO ---------- */
+    .video-box {
+      margin: 8px auto 12px; max-width: 400px;
+      border-radius: var(--radius); overflow: hidden;
+      box-shadow: 0 0 0 1px var(--line), 0 20px 60px -10px rgba(255, 61, 127, .35);
+    }
+    .video-placeholder {
+      aspect-ratio: 9 / 16; display: flex; align-items: center; justify-content: center;
+      background: var(--card); color: var(--muted); font-size: 14px; text-align: center; padding: 24px;
+    }
+    .sound-hint { text-align: center; font-size: 13px; color: var(--muted); margin-bottom: 24px; }
+
+    /* ---------- HIDDEN (revealed by delay) ---------- */
+    .esconder { display: none; }
+    .esconder.show { display: block; animation: fadeUp .6s ease both; }
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(16px) } to { opacity: 1; transform: none } }
+
+    /* ---------- BUTTON ---------- */
+    .btn {
+      display: block; width: 100%; text-align: center; text-decoration: none;
+      background: linear-gradient(180deg, var(--rose-2), var(--rose));
+      color: #fff; font-weight: 800; font-size: 18px; letter-spacing: .02em;
+      padding: 18px 20px; border-radius: 999px; border: 0; cursor: pointer;
+      box-shadow: 0 10px 30px -6px rgba(255, 61, 127, .6);
+      transition: transform .15s ease;
+      animation: glow 2.2s ease-in-out infinite;
+    }
+    .btn:hover { transform: translateY(-2px); }
+    .btn small { display: block; font-size: 12px; font-weight: 500; opacity: .9; margin-top: 2px; }
+    @keyframes glow {
+      0%,100% { box-shadow: 0 10px 30px -6px rgba(255, 61, 127, .55) }
+      50% { box-shadow: 0 10px 40px -2px rgba(255, 61, 127, .9) }
+    }
+    .trust {
+      display: flex; justify-content: center; gap: 16px; flex-wrap: wrap;
+      font-size: 12px; color: var(--muted); margin-top: 12px;
+    }
+
+    /* ---------- SECTIONS ---------- */
+    section { padding: 40px 0; }
+    .sec-title { text-align: center; font-size: clamp(24px, 6vw, 32px); margin-bottom: 8px; }
+    .sec-sub { text-align: center; color: var(--muted); margin-bottom: 24px; }
+
+    /* gallery */
+    .gallery { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+    .g-item {
+      position: relative; aspect-ratio: 3 / 4; border-radius: 12px; overflow: hidden;
+      background: linear-gradient(135deg, #3a1526, #1a0b12);
+    }
+    .g-item img {
+      width: 100%; height: 100%; object-fit: cover;
+      filter: blur(14px) brightness(.8); transform: scale(1.15);
+    }
+    .g-item.soft img { filter: blur(6px) brightness(.9); }
+    .g-item .lock {
+      position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
+      font-size: 22px; text-shadow: 0 2px 10px rgba(0,0,0,.6);
+    }
+    .g-count {
+      text-align: center; margin-top: 16px; font-weight: 700; color: var(--rose-2);
+    }
+
+    /* benefits */
+    .benefits { display: grid; gap: 10px; }
+    .benefit {
+      display: flex; gap: 14px; align-items: flex-start;
+      background: var(--card); border: 1px solid var(--line);
+      border-radius: var(--radius); padding: 16px;
+    }
+    .benefit .ico {
+      flex: 0 0 40px; height: 40px; border-radius: 12px;
+      display: flex; align-items: center; justify-content: center; font-size: 20px;
+      background: rgba(255, 61, 127, .12);
+    }
+    .benefit h3 { font-size: 16px; margin-bottom: 2px; }
+    .benefit p { font-size: 14px; color: var(--muted); }
+
+    /* price card */
+    .price-card {
+      background: linear-gradient(180deg, #24111a, var(--card));
+      border: 1px solid var(--rose); border-radius: 20px;
+      padding: 28px 20px; text-align: center;
+      box-shadow: 0 0 60px -20px rgba(255, 61, 127, .5);
+    }
+    .price-card .tag {
+      display: inline-block; background: var(--rose); color: #fff;
+      font-size: 11px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase;
+      padding: 5px 12px; border-radius: 999px; margin-bottom: 16px;
+    }
+    .stack { list-style: none; text-align: left; margin: 0 auto 20px; max-width: 380px; }
+    .stack li {
+      display: flex; justify-content: space-between; gap: 12px;
+      padding: 10px 0; border-bottom: 1px dashed var(--line); font-size: 14px;
+    }
+    .stack li span:last-child { color: var(--muted); text-decoration: line-through; white-space: nowrap; }
+    .compare { font-size: 14px; color: var(--muted); margin-bottom: 4px; }
+    .old-price { color: var(--muted); text-decoration: line-through; font-size: 18px; }
+    .new-price {
+      font-size: 56px; font-weight: 800; line-height: 1.1; color: var(--text);
+      margin: 4px 0 20px;
+    }
+    .new-price sup { font-size: 24px; vertical-align: top; position: relative; top: 10px; }
+    .once { color: var(--gold); font-weight: 700; margin-bottom: 20px; }
+
+    /* bonus */
+    .bonus {
+      display: flex; gap: 14px; align-items: center;
+      border: 1px dashed var(--gold); border-radius: var(--radius);
+      padding: 16px; background: rgba(245, 199, 107, .06);
+    }
+    .bonus .ico { font-size: 32px; }
+    .bonus h3 { font-size: 16px; color: var(--gold); }
+    .bonus p { font-size: 14px; color: var(--muted); }
+
+    /* guarantee */
+    .guarantee {
+      display: flex; gap: 16px; align-items: center;
+      background: var(--card); border: 1px solid var(--line);
+      border-radius: var(--radius); padding: 20px;
+    }
+    .seal {
+      flex: 0 0 76px; height: 76px; border-radius: 50%;
+      border: 3px solid var(--green); color: var(--green);
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      font-weight: 800; line-height: 1;
+    }
+    .seal b { font-size: 26px; }
+    .seal span { font-size: 10px; letter-spacing: .08em; }
+    .guarantee h3 { font-size: 17px; margin-bottom: 4px; }
+    .guarantee p { font-size: 14px; color: var(--muted); }
+
+    /* note from her */
+    .note {
+      font-family: "Playfair Display", serif; font-style: italic;
+      font-size: 20px; text-align: center; line-height: 1.5;
+      padding: 0 8px;
+    }
+    .note .sig { display: block; margin-top: 10px; font-size: 16px; color: var(--rose-2); }
+
+    /* faq */
+    .faq details {
+      background: var(--card); border: 1px solid var(--line);
+      border-radius: 12px; margin-bottom: 8px; overflow: hidden;
+    }
+    .faq summary {
+      cursor: pointer; padding: 16px; font-weight: 600; list-style: none;
+      display: flex; justify-content: space-between; align-items: center; gap: 12px;
+    }
+    .faq summary::-webkit-details-marker { display: none; }
+    .faq summary::after { content: "+"; color: var(--rose); font-size: 22px; font-weight: 400; }
+    .faq details[open] summary::after { content: "–"; }
+    .faq details p { padding: 0 16px 16px; color: var(--muted); font-size: 14px; }
+
+    /* footer */
+    footer {
+      border-top: 1px solid var(--line); margin-top: 24px;
+      padding: 28px 0 100px; text-align: center; font-size: 12px; color: var(--muted);
+    }
+    footer a { color: var(--muted); margin: 0 8px; }
+    footer .age { display: inline-block; border: 1px solid var(--line); border-radius: 6px; padding: 2px 8px; margin-bottom: 12px; }
+
+    /* sticky mobile cta */
+    .sticky-cta {
+      position: fixed; left: 0; right: 0; bottom: 0; z-index: 50;
+      padding: 10px 16px calc(10px + env(safe-area-inset-bottom));
+      background: linear-gradient(180deg, transparent, rgba(11,7,9,.95) 30%);
+      transform: translateY(110%); transition: transform .35s ease;
+    }
+    .sticky-cta.on { transform: none; }
+    .sticky-cta .btn { max-width: 608px; margin: 0 auto; font-size: 16px; padding: 15px; }
+  </style>
+</head>
+<body class="locked">
+
+  <!-- ==================== 18+ GATE ==================== -->
+  <div id="age-gate" role="dialog" aria-modal="true" aria-labelledby="gate-title">
+    <div class="gate-box">
+      <div class="badge">18+</div>
+      <h2 id="gate-title">Adults only</h2>
+      <p>This page contains content intended for adults. By entering, you confirm you are at least 18 years old (or the age of majority where you live).</p>
+      <button class="btn" id="gate-yes">I'm 18 or older — Enter</button>
+      <button class="btn-ghost" id="gate-no">Leave</button>
+    </div>
+  </div>
+
+  <div class="topbar"><span class="dot"></span>She recorded this video for you — watch with sound on 🔊</div>
+
+  <main class="wrap">
+
+    <!-- ==================== HERO + VSL ==================== -->
+    <div class="hero">
+      <span class="eyebrow">Private · Members only</span>
+      <h1>What <em>Nikki Summers</em> doesn't post anywhere else.</h1>
+      <p>Watch the video. <strong>She'll show you herself.</strong></p>
+    </div>
+
+    <div class="video-box">
+      <!-- ====== COLE AQUI O EMBED DA VTURB (substitua o placeholder abaixo) ======
+           Exemplo do formato:
+           <vturb-smartplayer id="vid-XXXXXXXX" style="display:block;margin:0 auto;width:100%;"></vturb-smartplayer>
+           <script type="text/javascript">var s=document.createElement("script");s.src="https://scripts.converteai.net/XXXX/players/XXXX/v4/player.js",s.async=!0,document.head.appendChild(s);</script>
+      -->
+      <div class="video-placeholder">▶ Cole aqui o embed da Vturb</div>
+      <!-- ====== FIM DO EMBED ====== -->
+    </div>
+    <p class="sound-hint">🔊 Turn your sound on</p>
+
+    <!-- ==================== REVEALED AFTER DELAY ==================== -->
+    <div class="esconder">
+
+      <a class="btn cta" href="#">UNLOCK EVERYTHING →<small>One-time payment · Lifetime access</small></a>
+      <div class="trust"><span>🔒 Secure checkout</span><span>🕶️ Discreet billing</span><span>✅ 7-day guarantee</span></div>
+
+      <!-- GALLERY -->
+      <section>
+        <h2 class="sec-title">A little taste…</h2>
+        <p class="sec-sub">Everything below is waiting for you, uncensored, inside.</p>
+        <div class="gallery">
+          <!-- Troque os src pelas suas prévias (img/p1.jpg ... img/p9.jpg). O blur é aplicado automaticamente. -->
+          <div class="g-item"><img src="img/p1.jpg" alt="" onerror="this.remove()"><span class="lock">🔒</span></div>
+          <div class="g-item soft"><img src="img/p2.jpg" alt="" onerror="this.remove()"><span class="lock">🔒</span></div>
+          <div class="g-item"><img src="img/p3.jpg" alt="" onerror="this.remove()"><span class="lock">🔒</span></div>
+          <div class="g-item"><img src="img/p4.jpg" alt="" onerror="this.remove()"><span class="lock">🔒</span></div>
+          <div class="g-item"><img src="img/p5.jpg" alt="" onerror="this.remove()"><span class="lock">🔒</span></div>
+          <div class="g-item soft"><img src="img/p6.jpg" alt="" onerror="this.remove()"><span class="lock">🔒</span></div>
+          <div class="g-item"><img src="img/p7.jpg" alt="" onerror="this.remove()"><span class="lock">🔒</span></div>
+          <div class="g-item"><img src="img/p8.jpg" alt="" onerror="this.remove()"><span class="lock">🔒</span></div>
+          <div class="g-item"><img src="img/p9.jpg" alt="" onerror="this.remove()"><span class="lock">🔒</span></div>
+        </div>
+        <p class="g-count">+[X] photos &amp; [X] videos waiting for you inside</p>
+      </section>
+
+      <!-- BENEFITS -->
+      <section>
+        <h2 class="sec-title">What you unlock today</h2>
+        <p class="sec-sub">Pay once. Keep it forever.</p>
+        <div class="benefits">
+          <div class="benefit"><div class="ico">🔥</div><div><h3>The full 18+ gallery</h3><p>Every photo and video she's ever posted, unlocked the second you join.</p></div></div>
+          <div class="benefit"><div class="ico">📅</div><div><h3>New content every week</h3><p>Fresh, never-seen sets dropping weekly. There's always something new waiting.</p></div></div>
+          <div class="benefit"><div class="ico">🔒</div><div><h3>100% exclusive</h3><p>None of this exists on social media. If you're not inside, you don't see it.</p></div></div>
+          <div class="benefit"><div class="ico">📸</div><div><h3>Custom requests</h3><p>Ask for the outfit, the pose, the vibe. She loves specific requests.</p></div></div>
+          <div class="benefit"><div class="ico">💬</div><div><h3>Message her directly</h3><p>Private chat, just you and her.</p></div></div>
+        </div>
+      </section>
+
+      <!-- PRICE -->
+      <section id="offer">
+        <div class="price-card">
+          <span class="tag">Lifetime access</span>
+          <ul class="stack">
+            <li><span>Full 18+ gallery</span><span>$99</span></li>
+            <li><span>Weekly new content — forever</span><span>$149</span></li>
+            <li><span>Private chat with Nikki</span><span>$49</span></li>
+            <li><span>Welcome pack (bonus)</span><span>$29</span></li>
+          </ul>
+          <p class="compare">Other creators charge $20–50 <strong>every month</strong>.</p>
+          <p class="old-price">Total value: $326</p>
+          <div class="new-price"><sup>$</sup>19</div>
+          <a class="btn cta" href="#">YES, I WANT IN →<small>Instant access after payment</small></a>
+          <div class="trust"><span>🔒 Secure</span><span>🕶️ Discreet billing</span><span>✅ 7-day refund</span></div>
+        </div>
+      </section>
+
+      <!-- BONUS -->
+      <div class="bonus">
+        <div class="ico">🎁</div>
+        <div><h3>Welcome gift</h3><p>An exclusive set she prepared just for new members, unlocked the moment you join.</p></div>
+      </div>
+
+      <!-- GUARANTEE -->
+      <section>
+        <div class="guarantee">
+          <div class="seal"><b>7</b><span>DAYS</span></div>
+          <div>
+            <h3>Love it or get your money back</h3>
+            <p>If it's not for you, just ask within 7 days and you get a full refund. No questions asked.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- NOTE FROM HER -->
+      <section>
+        <p class="note">"I kept the best part of me for in there. Come see… I left something special waiting for you."
+          <span class="sig">— Nikki 💋</span></p>
+      </section>
+
+      <!-- FAQ -->
+      <section class="faq">
+        <h2 class="sec-title">Questions</h2>
+        <p class="sec-sub">&nbsp;</p>
+        <details><summary>How much content is there?</summary><p>Over [X] photos and [X] videos right now — and it grows every single week.</p></details>
+        <details><summary>Do I have to pay every month?</summary><p>No. You pay once and keep access forever, including everything she posts in the future.</p></details>
+        <details><summary>Is it explicit?</summary><p>Yes, it's 18+ uncensored content you won't find anywhere else.</p></details>
+        <details><summary>What shows up on my card statement?</summary><p>A discreet company name. Nothing that mentions her or the content.</p></details>
+        <details><summary>How do I get access?</summary><p>Right after payment you create your login and everything is unlocked instantly, on your phone or computer.</p></details>
+        <details><summary>What if I don't like it?</summary><p>You have 7 days to ask for a full refund. No questions asked.</p></details>
+      </section>
+
+      <a class="btn cta" href="#">UNLOCK EVERYTHING NOW →<small>One-time $19 · Lifetime access</small></a>
+    </div>
+
+    <footer>
+      <span class="age">18+</span>
+      <p>Adult content. Intended for adults 18 years or older only.<br>All models were 18 years of age or older at the time of production.</p>
+      <p style="margin-top:12px"><a href="terms.html">Terms</a>·<a href="privacy.html">Privacy</a>·<a href="refund.html">Refunds</a></p>
+      <p style="margin-top:12px">© <span id="yr"></span> [BRAND]. All rights reserved.</p>
+    </footer>
+  </main>
+
+  <!-- sticky CTA (mobile) -->
+  <div class="sticky-cta esconder-sticky"><a class="btn cta" href="#">UNLOCK EVERYTHING →</a></div>
+
+  <script>
+    (function () {
+      var cfg = window.PAGE_CONFIG;
+      document.getElementById("yr").textContent = new Date().getFullYear();
+
+      // checkout links (mantém UTMs da URL)
+      var url = cfg.checkoutUrl + (location.search && cfg.checkoutUrl.indexOf("?") === -1 ? location.search : "");
+      document.querySelectorAll(".cta").forEach(function (a) { a.href = url; });
+
+      // ---------- age gate ----------
+      var gate = document.getElementById("age-gate");
+      function openPage() { gate.classList.add("hidden"); document.body.classList.remove("locked"); }
+      try { if (localStorage.getItem("age_ok") === "1") openPage(); } catch (e) {}
+      document.getElementById("gate-yes").onclick = function () {
+        try { localStorage.setItem("age_ok", "1"); } catch (e) {}
+        openPage();
+      };
+      document.getElementById("gate-no").onclick = function () { location.href = "https://www.google.com"; };
+
+      // ---------- reveal offer ----------
+      var revealed = false;
+      var sticky = document.querySelector(".sticky-cta");
+      function reveal() {
+        if (revealed) return;
+        revealed = true;
+        document.querySelectorAll(".esconder").forEach(function (el) { el.classList.add("show"); });
+        try { localStorage.setItem("offer_seen", "1"); } catch (e) {}
+        window.addEventListener("scroll", function () {
+          sticky.classList.toggle("on", window.scrollY > 600);
+        }, { passive: true });
+      }
+
+      var seen = false;
+      try { seen = localStorage.getItem("offer_seen") === "1"; } catch (e) {}
+      if (/[?&]nodelay/.test(location.search) || seen) { reveal(); return; }
+
+      // Vturb: mostra a oferta quando o vídeo chega no delay configurado
+      function hookVturb() {
+        var player = document.querySelector("vturb-smartplayer");
+        if (!player) return false;
+        player.addEventListener("player:ready", function () {
+          if (typeof player.displayHiddenElements === "function") {
+            player.displayHiddenElements(cfg.delaySeconds, [".esconder"], { persist: true });
+          }
+          // fallback: acompanha o tempo do vídeo
+          var iv = setInterval(function () {
+            var v = player.querySelector("video") || (player.shadowRoot && player.shadowRoot.querySelector("video"));
+            if (v && v.currentTime >= cfg.delaySeconds) { clearInterval(iv); reveal(); }
+          }, 1000);
+        });
+        // a vturb só tira o display:none; sincroniza com a nossa classe
+        new MutationObserver(function () {
+          var el = document.querySelector(".esconder");
+          if (el && el.style.display && el.style.display !== "none") reveal();
+        }).observe(document.querySelector(".esconder"), { attributes: true, attributeFilter: ["style"] });
+        return true;
+      }
+      if (!hookVturb()) {
+        var tries = 0, t = setInterval(function () { if (hookVturb() || ++tries > 20) clearInterval(t); }, 500);
+      }
+    })();
+  </script>
+</body>
+</html>
