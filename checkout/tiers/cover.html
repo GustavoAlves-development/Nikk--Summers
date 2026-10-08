@@ -37,5 +37,5 @@
   a.style.backgroundPosition = "center " + q.get("y") + "px";
   document.getElementById("v").style.top = q.get("b") + "px";
   document.getElementById("t").textContent = q.get("t");
-  document.getElementById("p").textContent = q.get("p");
+  var p = q.get("p"); if (p) document.getElementById("p").textContent = p; else document.getElementById("p").remove();
 </script></body></html>
