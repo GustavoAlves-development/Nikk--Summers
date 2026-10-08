@@ -16,3 +16,5 @@ shot 500,500  tits-out-capa-sem-preco.png     "cover.html?img=p3.png&y=-200&b=33
 # comparação "você tem × está perdendo" (página de upsell Tits Out)
 shot 800,600  tits-out-comparacao-800x600.png "compare.html"
 shot 800,600  fully-naked-comparacao-800x600.png "compare.html?l=p7.png&ly=-40&r=p2.png&ry=-40&b=240&t=Fully%20Naked"
+# grade 2x2 bloqueada (página de upsell Fully Naked)
+shot 800,600  fully-naked-grade-800x600.png "grid.html"
