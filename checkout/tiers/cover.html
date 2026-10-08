@@ -1,0 +1,41 @@
+<!doctype html>
+<!-- Template da capa 500x500. Parâmetros na URL: img, y (offset px), b (início do blur px), t (título), p (preço) -->
+<html><head><meta charset="utf-8">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@1,700;1,800&family=Inter:wght@800;900&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; box-sizing: border-box; }
+  html, body { width: 500px; height: 500px; overflow: hidden; background: #0d0609; }
+  .art { position: relative; width: 500px; height: 500px; background: center 0 / 500px auto no-repeat; }
+  .veil {
+    position: absolute; left: 0; right: 0; bottom: 0;
+    backdrop-filter: blur(26px) saturate(1.2); -webkit-backdrop-filter: blur(26px);
+    background: linear-gradient(180deg, rgba(255,61,127,.28), rgba(13,6,9,.82) 55%, #0d0609);
+    border-top: 2px solid rgba(255,122,168,.6);
+  }
+  .lock {
+    position: absolute; left: 50%; transform: translate(-50%, -50%); top: 0;
+    font: 900 13px/1 Inter, sans-serif; letter-spacing: .14em; color: #fff;
+    background: #ff3d7f; padding: 8px 14px; border-radius: 999px; white-space: nowrap;
+    box-shadow: 0 4px 18px rgba(255,61,127,.7);
+  }
+  .badge, .price { position: absolute; top: 18px; z-index: 2; font: 900 20px/1 Inter, sans-serif; padding: 9px 12px; border-radius: 10px; }
+  .badge { left: 18px; color: #fff; background: #ff3d7f; box-shadow: 0 4px 18px rgba(255,61,127,.6); }
+  .price { right: 18px; color: #0d0609; background: #fff; font-size: 22px; }
+  .title { position: absolute; left: 0; right: 0; bottom: 22px; text-align: center; font-family: "Playfair Display", serif; font-style: italic; }
+  .title .n { display: block; font-weight: 700; font-size: 24px; color: #fff; letter-spacing: .16em; margin-bottom: 4px; }
+  .title .u { display: block; font-weight: 800; font-size: 64px; line-height: .95; color: #ff3d7f; text-shadow: 0 0 24px rgba(255,61,127,.7), 0 3px 0 #7a0f36; }
+</style></head>
+<body><div class="art" id="a">
+  <span class="badge">18+</span><span class="price" id="p"></span>
+  <div class="veil" id="v"><span class="lock">🔒 UNCENSORED INSIDE</span>
+    <div class="title"><span class="n">NIKKI UNCENSORED</span><span class="u" id="t"></span></div>
+  </div>
+</div>
+<script>
+  var q = new URLSearchParams(location.search), a = document.getElementById("a");
+  a.style.backgroundImage = "url(../../img/" + q.get("img") + ")";
+  a.style.backgroundPosition = "center " + q.get("y") + "px";
+  document.getElementById("v").style.top = q.get("b") + "px";
+  document.getElementById("t").textContent = q.get("t");
+  document.getElementById("p").textContent = q.get("p");
+</script></body></html>
