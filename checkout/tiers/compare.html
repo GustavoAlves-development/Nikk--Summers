@@ -1,0 +1,39 @@
+<!doctype html>
+<!-- Imagem "você tem × você está perdendo" (800x600) da página de upsell Tits Out -->
+<html><head><meta charset="utf-8">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@1,800&family=Inter:wght@800;900&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; box-sizing: border-box; }
+  html, body { width: 800px; height: 600px; overflow: hidden; background: #0d0609; font-family: Inter, sans-serif; }
+  .art { position: relative; display: flex; gap: 6px; width: 800px; height: 600px; background: #0d0609; }
+  .side { position: relative; width: 397px; height: 600px; overflow: hidden; background: center -100px / 400px auto no-repeat; }
+  .have { background-image: url(../../img/p8.png); filter: saturate(.85); }
+  .miss { background-image: url(../../img/p3.png); }
+  .have::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, transparent 60%, rgba(13,6,9,.85)); }
+  .veil {
+    position: absolute; left: 0; right: 0; top: 285px; bottom: 0;
+    backdrop-filter: blur(28px) saturate(1.2); -webkit-backdrop-filter: blur(28px);
+    background: linear-gradient(180deg, rgba(255,61,127,.35), rgba(13,6,9,.75) 70%, #0d0609);
+    border-top: 2px solid rgba(255,122,168,.7);
+  }
+  .pill { position: absolute; top: 18px; left: 50%; transform: translateX(-50%); z-index: 2; white-space: nowrap;
+          font: 900 17px/1 Inter, sans-serif; letter-spacing: .06em; padding: 10px 16px; border-radius: 999px; color: #fff; }
+  .have .pill { background: #16a34a; box-shadow: 0 4px 16px rgba(22,163,74,.5); }
+  .miss .pill { background: #ff3d7f; box-shadow: 0 4px 18px rgba(255,61,127,.7); }
+  .cap { position: absolute; left: 0; right: 0; bottom: 26px; z-index: 2; text-align: center; color: #fff; }
+  .have .cap b { font: 800 22px/1.2 Inter, sans-serif; opacity: .9; }
+  .miss .cap .lock { font-size: 54px; line-height: 1; filter: drop-shadow(0 4px 14px rgba(255,61,127,.8)); }
+  .miss .cap .t { display: block; margin-top: 10px; font: italic 800 54px/1 "Playfair Display", serif; color: #ff3d7f;
+                  text-shadow: 0 0 24px rgba(255,61,127,.7), 0 3px 0 #7a0f36; }
+  .miss .cap small { display: block; margin-top: 10px; font: 800 16px/1 Inter, sans-serif; letter-spacing: .1em; }
+  .arrow { position: absolute; left: 50%; top: 300px; transform: translate(-50%, -50%); z-index: 3;
+           width: 64px; height: 64px; border-radius: 50%; background: #fff; color: #ff3d7f;
+           display: flex; align-items: center; justify-content: center; font: 900 34px/1 Inter, sans-serif;
+           box-shadow: 0 6px 24px rgba(0,0,0,.6), 0 0 0 6px rgba(255,61,127,.5); }
+</style></head>
+<body><div class="art">
+  <div class="side have"><span class="pill">✓ YOU HAVE THIS</span><div class="cap"><b>Lingerie teasing</b></div></div>
+  <div class="side miss"><span class="pill">🔒 YOU'RE MISSING THIS</span><div class="veil"></div>
+    <div class="cap"><div class="lock">🔒</div><span class="t">Tits Out</span><small>TAP "YES" TO UNLOCK</small></div></div>
+  <div class="arrow">→</div>
+</div></body></html>
