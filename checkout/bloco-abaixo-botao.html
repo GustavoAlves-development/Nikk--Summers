@@ -1,0 +1,53 @@
+<!-- Bloco para colar ABAIXO do botão de compra do checkout.
+     Tudo fica dentro de .nu-box, então não interfere no resto do checkout.
+     ⚠️ Confira com o seu gateway o nome que aparece na fatura antes de publicar a frase "Discreet billing". -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+  .nu-box { max-width: 480px; margin: 18px auto 0; font-family: "Inter", system-ui, sans-serif; color: #f5e9ee; }
+  .nu-box * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  .nu-trust { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+  .nu-trust div {
+    display: flex; gap: 10px; align-items: flex-start;
+    background: #1a0b12; border: 1px solid #3a1526; border-radius: 12px; padding: 12px;
+  }
+  .nu-trust .i { font-size: 20px; line-height: 1; }
+  .nu-trust b { display: block; font-size: 13px; font-weight: 800; color: #fff; margin-bottom: 2px; }
+  .nu-trust span { font-size: 12px; line-height: 1.35; color: #c9aab7; }
+
+  .nu-get {
+    margin-top: 12px; background: linear-gradient(180deg, #24101a, #1a0b12);
+    border: 1px solid #ff3d7f; border-radius: 14px; padding: 16px 18px;
+  }
+  .nu-get h4 { font-size: 13px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; color: #ff7aa8; margin-bottom: 10px; }
+  .nu-get ul { list-style: none; }
+  .nu-get li { display: flex; gap: 8px; font-size: 14px; line-height: 1.4; padding: 5px 0; border-bottom: 1px dashed #3a1526; }
+  .nu-get li:last-child { border-bottom: 0; }
+  .nu-get li::before { content: "✓"; color: #ff3d7f; font-weight: 800; }
+  .nu-total { display: flex; justify-content: space-between; align-items: baseline; margin-top: 12px; padding-top: 12px; border-top: 1px solid #3a1526; }
+  .nu-total span { font-size: 13px; color: #c9aab7; }
+  .nu-total s { margin-right: 8px; color: #8a6b78; }
+  .nu-total strong { font-size: 26px; font-weight: 800; color: #ff3d7f; }
+
+  @media (max-width: 380px) { .nu-trust { grid-template-columns: 1fr; } }
+</style>
+
+<div class="nu-box">
+  <div class="nu-trust">
+    <div><span class="i">🕶️</span><p><b>Discreet billing</b><span>Nothing adult on your card statement.</span></p></div>
+    <div><span class="i">🔒</span><p><b>100% secure</b><span>SSL-encrypted payment. Your data stays private.</span></p></div>
+    <div><span class="i">✅</span><p><b>7-day guarantee</b><span>Not into it? Full refund, no questions asked.</span></p></div>
+    <div><span class="i">⚡</span><p><b>Instant access</b><span>Your login lands in your inbox in seconds.</span></p></div>
+  </div>
+
+  <div class="nu-get">
+    <h4>🔥 What you get inside</h4>
+    <ul>
+      <li>The full uncensored gallery: every photo &amp; video</li>
+      <li>Brand-new sets dropping every week</li>
+      <li>Private chat, just you and Nikki</li>
+      <li>Welcome pack bonus</li>
+    </ul>
+    <div class="nu-total"><span>Today only</span><p><s>$326</s><strong>$19</strong></p></div>
+  </div>
+</div>
