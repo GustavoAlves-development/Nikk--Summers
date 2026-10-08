@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Wait! One more thing…</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%23ff3d7f' d='M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z'/%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,700&family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <!-- ElevPay: processa o aceite/recusa do upsell (NÃO remover) -->
+  <script src="https://elevpaybr.com.br/script/upsell-processor.js"></script>
+
+  <style>
+    :root {
+      --bg: #0b0709;
+      --card: #1b1015;
+      --line: #2e1c24;
+      --text: #f6eef1;
+      --muted: #b49ea8;
+      --rose: #ff3d7f;
+      --rose-2: #ff7aa8;
+      --green: #2fd67b;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: radial-gradient(ellipse at top, #2a0f1c 0%, var(--bg) 55%) fixed, var(--bg);
+      color: var(--text); font-family: "Inter", system-ui, sans-serif;
+      line-height: 1.55; -webkit-font-smoothing: antialiased;
+    }
+    .wrap { width: 100%; max-width: 560px; margin: 0 auto; padding: 0 16px 40px; }
+
+    /* aviso no topo */
+    .alert {
+      background: linear-gradient(90deg, var(--rose), #c2185b); color: #fff;
+      text-align: center; font-weight: 800; font-size: 14px; padding: 10px 16px;
+    }
+
+    /* etapas */
+    .steps { display: flex; justify-content: center; gap: 6px; margin: 20px 0 22px; font-size: 12px; font-weight: 700; }
+    .steps span { padding: 6px 10px; border-radius: 999px; background: var(--card); border: 1px solid var(--line); color: var(--muted); }
+    .steps .done { color: var(--green); border-color: rgba(47,214,123,.4); }
+    .steps .now { color: #fff; background: var(--rose); border-color: var(--rose); }
+
+    h1 {
+      font-family: "Playfair Display", Georgia, serif; text-align: center;
+      font-size: clamp(28px, 7.5vw, 38px); line-height: 1.15;
+    }
+    h1 em { color: var(--rose); }
+    .sub { text-align: center; color: var(--muted); margin: 12px auto 22px; max-width: 440px; }
+    .sub strong { color: #fff; }
+
+    .cover {
+      display: block; width: 100%; max-width: 420px; margin: 0 auto; aspect-ratio: 1;
+      border-radius: 18px; border: 2px solid var(--rose); object-fit: cover;
+      box-shadow: 0 12px 40px rgba(255,61,127,.35);
+    }
+
+    .inside {
+      margin: 24px 0; background: var(--card); border: 1px solid var(--line);
+      border-radius: 16px; padding: 18px 20px;
+    }
+    .inside h2 { font-size: 13px; letter-spacing: .12em; text-transform: uppercase; color: var(--rose-2); margin-bottom: 10px; }
+    .inside ul { list-style: none; }
+    .inside li { display: flex; gap: 10px; padding: 6px 0; border-bottom: 1px dashed var(--line); }
+    .inside li:last-child { border-bottom: 0; }
+    .inside li::before { content: "🔥"; }
+
+    .offer { text-align: center; }
+    .offer .tag { display: inline-block; font-size: 12px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; color: var(--rose-2); }
+    .offer .price { font-size: 56px; font-weight: 900; line-height: 1.1; }
+    .offer .price sup { font-size: 26px; vertical-align: 22px; }
+    .offer .note { color: var(--muted); font-size: 14px; }
+
+    .timer { margin: 16px auto 18px; text-align: center; font-size: 14px; color: var(--muted); }
+    .timer b { color: var(--rose); font-size: 18px; font-variant-numeric: tabular-nums; }
+
+    /* botões ElevPay (mesma funcionalidade, visual novo) */
+    #elevpay-upsell-buttons { display: flex; flex-direction: column; align-items: center; gap: 12px; }
+    .btn-yes {
+      width: 100%; border: 0; border-radius: 14px; cursor: pointer; padding: 18px 20px;
+      background: linear-gradient(180deg, var(--rose-2), var(--rose)); color: #fff;
+      font: 900 19px/1.2 "Inter", system-ui, sans-serif; letter-spacing: .02em;
+      box-shadow: 0 10px 30px rgba(255,61,127,.45);
+      animation: pulse 1.8s ease-in-out infinite;
+    }
+    .btn-yes small { display: block; font-weight: 600; font-size: 13px; opacity: .9; margin-top: 4px; }
+    .btn-no {
+      background: transparent; border: 0; cursor: pointer; padding: 10px 16px;
+      color: #8a7480; font: 500 14px/1.3 "Inter", system-ui, sans-serif; text-decoration: underline;
+    }
+    @keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.03); } }
+    @media (prefers-reduced-motion: reduce) { .btn-yes { animation: none; } }
+
+    .trust { display: flex; justify-content: center; flex-wrap: wrap; gap: 14px; margin-top: 18px; font-size: 13px; color: var(--muted); }
+  </style>
+</head>
+<body>
+  <div class="alert">⚠️ WAIT! Your order isn't complete yet. Don't close this page.</div>
+
+  <main class="wrap">
+    <div class="steps">
+      <span class="done">✓ Access</span>
+      <span class="now">2. Upgrade</span>
+      <span>3. Enjoy</span>
+    </div>
+
+    <h1>You've seen her tease…<br><em>now watch her take it off.</em></h1>
+    <p class="sub">This set is <strong>not included</strong> in your access. It's offered once, right here, and never again.</p>
+
+    <img class="cover" src="../checkout/tiers/tits-out-capa-500x500.png" alt="Nikki Uncensored: Tits Out">
+
+    <section class="inside">
+      <h2>Inside "Tits Out"</h2>
+      <ul>
+        <li>Top's off: tits out, nothing covering them</li>
+        <li>Soaked panties, up close</li>
+        <li>Her hand between her legs, teasing you</li>
+        <li>Close enough to make you ache</li>
+      </ul>
+    </section>
+
+    <div class="offer">
+      <span class="tag">One-time offer · only on this page</span>
+      <div class="price"><sup>$</sup>34</div>
+      <p class="note">One click. No need to enter your card again.</p>
+    </div>
+
+    <p class="timer">This offer disappears in <b id="timer">10:00</b></p>
+
+    <div id="elevpay-upsell-buttons">
+      <button class="btn-yes" onclick="ElevPayUpsell.accept()">YES! SHOW ME EVERYTHING 🔥<small>Add "Tits Out" to my order for $34</small></button>
+      <button class="btn-no" onclick="ElevPayUpsell.decline()">No thanks, I'll stick to the teasing</button>
+    </div>
+
+    <div class="trust"><span>🔒 Secure payment</span><span>🕶️ Discreet billing</span><span>✅ 7-day guarantee</span></div>
+  </main>
+
+  <script>
+    // contador visual de 10 minutos
+    (function () {
+      var el = document.getElementById("timer"), left = 600;
+      var t = setInterval(function () {
+        left = Math.max(0, left - 1);
+        el.textContent = String(Math.floor(left / 60)).padStart(2, "0") + ":" + String(left % 60).padStart(2, "0");
+        if (!left) clearInterval(t);
+      }, 1000);
+    })();
+  </script>
+</body>
+</html>
