@@ -12,3 +12,9 @@ shot 916-1-banned.png       "ad-916.html?img=p8.png&s=1250&y=-280&tag=$(enc '�
 shot 916-2-not-supposed.png "ad-916.html?img=p7.png&s=1180&y=0&h=$(enc 'I wasn’t supposed to <em>post this</em>… 🙈')&sub=$(enc '…but I did it anyway 😈')&c=$(enc 'Tap “Learn More” before I regret it')"
 shot 916-3-dont-tell.png    "ad-916.html?img=p9.png&s=1080&y=-60&tag=$(enc '🤫 Secret')&h=$(enc 'Don’t tell anyone <em>you saw this</em>')&sub=$(enc 'It stays just between us.')&c=$(enc 'Tap “Learn More” 👀')"
 shot 916-4-alone.png        "ad-916.html?layout=grid&imgs=p9.png,p8.png,p7.png&ys=-130,-210,-80&h=$(enc 'Only open this<br><em>if you’re alone</em> 👀')&sub=$(enc 'Seriously. Don’t say I didn’t warn you.')&c=$(enc 'Tap “Learn More”')"
+
+# ---- rodada 3: fotos novas (img/ads) ----
+shot 916-5-shh.png        "ad-916.html?img=ads/shh.png&s=1080&y=-150&tag=$(enc '🤫 Secret')&h=$(enc 'Don’t tell anyone <em>you saw this</em>')&sub=$(enc 'It stays just between us.')&c=$(enc 'Tap “Learn More” 👀')"
+shot 916-6-banned.png     "ad-916.html?img=ads/red-dress.png&s=820&y=-40&tag=$(enc '😳 Oops')&h=$(enc 'This got me <em>banned</em> from Instagram')&sub=$(enc 'So I posted it somewhere else…')&c=$(enc 'Tap “Learn More” to see it')"
+shot 916-7-not-supposed.png "ad-916.html?img=ads/lift.png&s=1080&y=-200&h=$(enc 'I wasn’t supposed to <em>post this</em>… 🙈')&sub=$(enc '…but I did it anyway 😈')&c=$(enc 'Tap “Learn More” before I regret it')"
+shot 916-8-alone.png      "ad-916.html?img=ads/elevator.jpg&s=1080&y=-330&h=$(enc 'Only open this<br><em>if you’re alone</em> 👀')&sub=$(enc 'Seriously. Don’t say I didn’t warn you.')&c=$(enc 'Tap “Learn More”')"

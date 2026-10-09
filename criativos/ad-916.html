@@ -9,6 +9,7 @@
   * { margin: 0; box-sizing: border-box; }
   html, body { width: 1080px; height: 1920px; overflow: hidden; background: #0d0609; font-family: Inter, sans-serif; }
   .art { position: relative; width: 1080px; height: 1920px; background: center 0 / 1080px auto no-repeat; }
+  .bgblur { position: absolute; inset: 0 0 auto 0; height: 860px; background: center / cover no-repeat; filter: blur(40px) brightness(.55); transform: scale(1.1); }
   .grid { position: absolute; left: 0; right: 0; top: 200px; display: flex; gap: 10px; height: 660px; }
   .grid div { flex: 1; background: center 0 / auto 1300px no-repeat; }
   .panel { position: absolute; left: 0; right: 0; top: 840px; bottom: 0; background: #0d0609; text-align: center; padding: 50px 60px 0; }
@@ -48,9 +49,14 @@
     });
     $("a").prepend(g);
   } else {
-    $("a").style.backgroundImage = "url(../img/" + q.get("img") + ")";
-    $("a").style.backgroundSize = (q.get("s") || 1080) + "px auto";
-    $("a").style.backgroundPosition = "center " + q.get("y") + "px";
+    // foto principal numa camada própria (fica acima do fundo desfocado, abaixo do texto)
+    var ph = document.createElement("div"), sz = q.get("s") || 1080;
+    ph.style.cssText = "position:absolute;inset:0;background:url(../img/" + q.get("img") + ") center " + q.get("y") + "px / " + sz + "px auto no-repeat";
+    $("a").prepend(ph);
+    if (sz < 1080) { // imagem menor que a largura: preenche as laterais com a própria foto desfocada
+      var bl = document.createElement("div"); bl.className = "bgblur"; bl.style.backgroundImage = "url(../img/" + q.get("img") + ")";
+      $("a").prepend(bl);
+    }
   }
   $("h").innerHTML = q.get("h");
   $("s").textContent = q.get("sub");
