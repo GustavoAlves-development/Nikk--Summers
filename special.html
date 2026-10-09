@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Wait! A secret discount for you</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%23ff3d7f' d='M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z'/%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,700&family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <!-- ============================================================
+       CONFIG — edite aqui
+       ============================================================ -->
+  <script>
+    window.PAGE_CONFIG = {
+      checkoutUrl: "https://SEU-CHECKOUT-DE-12-AQUI.com",   // link do checkout com o preço de $12
+    };
+  </script>
+
+  <style>
+    :root {
+      --bg: #0b0709;
+      --card: #1b1015;
+      --line: #2e1c24;
+      --text: #f6eef1;
+      --muted: #b49ea8;
+      --rose: #ff3d7f;
+      --rose-2: #ff7aa8;
+      --green: #2fd67b;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: radial-gradient(ellipse at top, #2a0f1c 0%, var(--bg) 55%) fixed, var(--bg);
+      color: var(--text); font-family: "Inter", system-ui, sans-serif;
+      line-height: 1.55; -webkit-font-smoothing: antialiased; padding-bottom: 90px;
+    }
+    .wrap { width: 100%; max-width: 480px; margin: 0 auto; padding: 0 16px; }
+
+    .alert {
+      background: linear-gradient(90deg, var(--rose), #c2185b); color: #fff;
+      text-align: center; font-weight: 800; font-size: 14px; padding: 10px 16px;
+    }
+
+    h1 {
+      font-family: "Playfair Display", Georgia, serif; text-align: center;
+      font-size: clamp(28px, 8vw, 38px); line-height: 1.15; margin-top: 22px;
+    }
+    h1 em { color: var(--rose); }
+    .sub { text-align: center; color: var(--muted); margin: 10px auto 20px; }
+    .sub strong { color: #fff; }
+
+    /* foto principal */
+    .hero-img { position: relative; border-radius: 18px; overflow: hidden; box-shadow: 0 0 0 2px var(--rose), 0 20px 60px -10px rgba(255,61,127,.45); }
+    .hero-img img { display: block; width: 100%; aspect-ratio: 4 / 5; object-fit: cover; object-position: center 20%; }
+    .hero-img .off {
+      position: absolute; top: 14px; right: 14px; background: var(--rose); color: #fff;
+      font-weight: 900; font-size: 22px; padding: 10px 14px; border-radius: 12px; transform: rotate(4deg);
+      box-shadow: 0 6px 20px rgba(255,61,127,.6);
+    }
+    .hero-img .cap {
+      position: absolute; left: 0; right: 0; bottom: 0; padding: 50px 16px 16px; text-align: center;
+      background: linear-gradient(180deg, transparent, rgba(11,7,9,.92));
+      font-family: "Playfair Display", serif; font-style: italic; font-size: 22px;
+    }
+
+    /* mini galeria */
+    .duo { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; margin-top: 8px; }
+    .duo div { position: relative; border-radius: 12px; overflow: hidden; aspect-ratio: 3 / 4; }
+    .duo img { width: 100%; height: 100%; object-fit: cover; object-position: center 25%; display: block; }
+    .duo .locked img { filter: blur(10px) brightness(.7); transform: scale(1.15); }
+    .duo .locked span {
+      position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center;
+      font-size: 13px; font-weight: 800; text-align: center; gap: 4px;
+    }
+    .duo .locked span b { font-size: 26px; }
+
+    .list { margin: 22px 0; background: var(--card); border: 1px solid var(--line); border-radius: 16px; padding: 16px 18px; }
+    .list li { list-style: none; display: flex; gap: 10px; padding: 6px 0; border-bottom: 1px dashed var(--line); }
+    .list li:last-child { border-bottom: 0; }
+    .list li::before { content: "🔥"; }
+
+    .price { text-align: center; }
+    .price .old { color: #8a7480; font-size: 20px; text-decoration: line-through; margin-right: 8px; }
+    .price .new { font-size: 54px; font-weight: 900; color: var(--rose); line-height: 1.1; }
+    .price p { color: var(--muted); font-size: 14px; }
+    .timer { text-align: center; margin: 10px 0 16px; font-size: 14px; color: var(--muted); }
+    .timer b { color: var(--rose); font-size: 18px; font-variant-numeric: tabular-nums; }
+
+    .btn {
+      display: block; width: 100%; text-align: center; text-decoration: none;
+      background: linear-gradient(180deg, var(--rose-2), var(--rose)); color: #fff;
+      font-weight: 900; font-size: 19px; letter-spacing: .02em; padding: 18px 20px; border-radius: 14px;
+      box-shadow: 0 10px 30px rgba(255,61,127,.45); animation: pulse 1.8s ease-in-out infinite;
+    }
+    .btn small { display: block; font-weight: 600; font-size: 13px; opacity: .9; margin-top: 3px; }
+    @keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.03); } }
+    @media (prefers-reduced-motion: reduce) { .btn { animation: none; } }
+
+    .trust { display: flex; justify-content: center; flex-wrap: wrap; gap: 14px; margin: 16px 0 10px; font-size: 13px; color: var(--muted); }
+
+    .sticky {
+      position: fixed; left: 0; right: 0; bottom: 0; z-index: 10; padding: 10px 16px;
+      background: rgba(11,7,9,.92); backdrop-filter: blur(10px); border-top: 1px solid var(--line);
+    }
+    .sticky .btn { max-width: 448px; margin: 0 auto; font-size: 16px; padding: 14px; animation: none; }
+  </style>
+</head>
+<body>
+  <div class="alert">🎁 WAIT! You just unlocked a secret discount</div>
+
+  <main class="wrap">
+    <h1>Leaving already? 🥺<br><em>Fine… take it all for $12.</em></h1>
+    <p class="sub">I don't do this for everyone. <strong>This price shows up only once.</strong> Close this page and it's gone.</p>
+
+    <div class="hero-img">
+      <img src="img/web/p8.jpg" alt="Nikki">
+      <span class="off">-37%</span>
+      <div class="cap">"I'll be waiting inside 😈"</div>
+    </div>
+
+    <div class="duo">
+      <div><img src="img/web/p9.jpg" alt=""></div>
+      <div><img src="img/web/p7.jpg" alt=""></div>
+      <div class="locked"><img src="img/web/p9.jpg" alt=""><span><b>🔒</b>+ much more<br>inside</span></div>
+    </div>
+
+    <ul class="list">
+      <li>The full uncensored 18+ gallery</li>
+      <li>Brand-new sets dropping every week</li>
+      <li>Private chat, just you and me</li>
+      <li>Welcome pack bonus</li>
+    </ul>
+
+    <div class="price">
+      <span class="old">$19</span><span class="new">$12</span>
+      <p>Same access. Secret price. Only on this page.</p>
+    </div>
+    <p class="timer">This discount disappears in <b id="timer">10:00</b></p>
+
+    <a class="btn cta" href="#">YES, I WANT IT FOR $12 →<small>Instant access after payment</small></a>
+
+    <div class="trust"><span>🔒 Secure checkout</span><span>🕶️ Discreet billing</span><span>✅ 7-day guarantee</span></div>
+  </main>
+
+  <div class="sticky"><a class="btn cta" href="#">GET IT ALL FOR $12 →</a></div>
+
+  <script>
+    (function () {
+      var cfg = window.PAGE_CONFIG;
+      // checkout links (mantém UTMs da URL)
+      var url = cfg.checkoutUrl + (location.search && cfg.checkoutUrl.indexOf("?") === -1 ? location.search : "");
+      document.querySelectorAll(".cta").forEach(function (a) { a.href = url; });
+
+      // contador visual de 10 minutos
+      var el = document.getElementById("timer"), left = 600;
+      var t = setInterval(function () {
+        left = Math.max(0, left - 1);
+        el.textContent = String(Math.floor(left / 60)).padStart(2, "0") + ":" + String(left % 60).padStart(2, "0");
+        if (!left) clearInterval(t);
+      }, 1000);
+    })();
+  </script>
+</body>
+</html>
