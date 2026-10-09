@@ -473,6 +473,11 @@
       }
 
       // sem memória entre visitas: toda visita espera o vídeo chegar no delay
+      // (apaga a marca antiga que a versão com persist:true deixou salva)
+      try {
+        localStorage.removeItem("offer_seen");
+        localStorage.removeItem("displayHiddenElements-6ac8283fddb14edd53f7802d");
+      } catch (e) {}
       if (/[?&]nodelay/.test(location.search)) { reveal(); return; }
 
       // Vturb: mostra a oferta quando o vídeo chega no delay configurado
