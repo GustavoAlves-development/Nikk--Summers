@@ -55,35 +55,8 @@
       line-height: 1.55;
       -webkit-font-smoothing: antialiased;
     }
-    body.locked { overflow: hidden; }
     .wrap { width: 100%; max-width: 640px; margin: 0 auto; padding: 0 16px; }
     h1, h2, .serif { font-family: "Playfair Display", Georgia, serif; }
-
-    /* ---------- AGE GATE ---------- */
-    #age-gate {
-      position: fixed; inset: 0; z-index: 100;
-      background: rgba(8, 4, 6, .96); backdrop-filter: blur(14px);
-      display: flex; align-items: center; justify-content: center; padding: 16px;
-    }
-    #age-gate.hidden { display: none; }
-    .gate-box {
-      background: var(--card); border: 1px solid var(--line); border-radius: 20px;
-      padding: 32px 24px; max-width: 400px; width: 100%; text-align: center;
-    }
-    .gate-box .badge {
-      display: inline-flex; align-items: center; justify-content: center;
-      width: 64px; height: 64px; border-radius: 50%;
-      border: 2px solid var(--rose); color: var(--rose);
-      font-weight: 800; font-size: 20px; margin-bottom: 16px;
-    }
-    .gate-box h2 { font-size: 24px; margin-bottom: 8px; }
-    .gate-box p { color: var(--muted); font-size: 14px; margin-bottom: 24px; }
-    .gate-box .btn { width: 100%; margin-bottom: 10px; }
-    .btn-ghost {
-      display: block; width: 100%; padding: 12px; background: none;
-      border: 1px solid var(--line); border-radius: 999px;
-      color: var(--muted); font: inherit; font-size: 14px; cursor: pointer;
-    }
 
     /* ---------- TOP BAR ---------- */
     .topbar {
@@ -282,18 +255,7 @@
     .sticky-cta .btn { max-width: 608px; margin: 0 auto; font-size: 16px; padding: 15px; }
   </style>
 </head>
-<body class="locked">
-
-  <!-- ==================== 18+ GATE ==================== -->
-  <div id="age-gate" role="dialog" aria-modal="true" aria-labelledby="gate-title">
-    <div class="gate-box">
-      <div class="badge">18+</div>
-      <h2 id="gate-title">Adults only</h2>
-      <p>This page contains content intended for adults. By entering, you confirm you are at least 18 years old (or the age of majority where you live).</p>
-      <button class="btn" id="gate-yes">I'm 18 or older — Enter</button>
-      <button class="btn-ghost" id="gate-no">Leave</button>
-    </div>
-  </div>
+<body>
 
   <div class="topbar"><span class="dot"></span>She recorded this video for you — watch with sound on 🔊</div>
 
@@ -448,16 +410,6 @@
       // checkout links (mantém UTMs da URL)
       var url = cfg.checkoutUrl + (location.search && cfg.checkoutUrl.indexOf("?") === -1 ? location.search : "");
       document.querySelectorAll(".cta").forEach(function (a) { a.href = url; });
-
-      // ---------- age gate ----------
-      var gate = document.getElementById("age-gate");
-      function openPage() { gate.classList.add("hidden"); document.body.classList.remove("locked"); }
-      try { if (localStorage.getItem("age_ok") === "1") openPage(); } catch (e) {}
-      document.getElementById("gate-yes").onclick = function () {
-        try { localStorage.setItem("age_ok", "1"); } catch (e) {}
-        openPage();
-      };
-      document.getElementById("gate-no").onclick = function () { location.href = "https://www.google.com"; };
 
       // ---------- reveal offer ----------
       var revealed = false;
