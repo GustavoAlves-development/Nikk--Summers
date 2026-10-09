@@ -1,5 +1,5 @@
 <!doctype html>
-<!-- Template de criativo 1080x1350 (Meta feed 4:5). Parâmetros: img, y (offset px), s (largura da imagem px), p (início do painel px), h (headline), sub, layout=grid -->
+<!-- Template de criativo 1080x1350 (Meta feed 4:5). Parâmetros: img, y (offset px), s (largura da imagem px), p (início do painel px), h (headline), sub, layout=grid, c (texto do botão), arrow=1 (seta para o "Saiba mais" abaixo da imagem) -->
 <html><head><meta charset="utf-8">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,800;1,800&family=Inter:wght@600;800;900&display=swap" rel="stylesheet">
 <style>
@@ -31,6 +31,11 @@
     background: rgba(13,6,9,.65); border: 2px solid rgba(255,255,255,.35); padding: 16px 24px; border-radius: 999px;
     backdrop-filter: blur(8px);
   }
+  /* seta encostada na borda de baixo, apontando para o botão "Saiba mais" do anúncio */
+  .arrow-down { position: absolute; left: 0; right: 0; bottom: 0; height: 120px; display: flex; flex-direction: column; align-items: center; justify-content: flex-end; }
+  .arrow-down span { font: 900 30px/1 Inter, sans-serif; letter-spacing: .12em; color: #ff7aa8; margin-bottom: 8px; }
+  .arrow-down i { width: 0; height: 0; border-left: 70px solid transparent; border-right: 70px solid transparent; border-top: 56px solid #ff3d7f; filter: drop-shadow(0 0 18px rgba(255,61,127,.7)); }
+  .has-arrow .panel { padding-bottom: 150px; }
 </style></head>
 <body><div class="art" id="a">
   <span class="tag" id="tag"></span>
@@ -55,6 +60,8 @@
   $("p").style.top = q.get("p") + "px";
   $("h").innerHTML = q.get("h");
   $("s").textContent = q.get("sub");
+  if (q.get("c")) document.querySelector(".cta").textContent = q.get("c");
+  if (q.get("arrow")) { $("a").classList.add("has-arrow"); $("a").insertAdjacentHTML("beforeend", "<div class=\"arrow-down\"><span>TAP RIGHT BELOW</span><i></i></div>"); }
   if (q.get("fs")) $("h").style.fontSize = q.get("fs") + "px";
   if (q.get("tag")) $("tag").textContent = q.get("tag"); else $("tag").remove();
 </script></body></html>
