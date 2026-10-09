@@ -17,6 +17,7 @@
     window.PAGE_CONFIG = {
       checkoutUrl: "https://SEU-CHECKOUT-AQUI.com",   // link do checkout
       delaySeconds: 140,                              // segundo do vídeo em que a oferta aparece (2:20 = 140)
+      backRedirectUrl: "special.html",                // página aberta quando a pessoa aperta "voltar" ("" desativa)
       // Para testar sem esperar o vídeo: abra a página com ?nodelay no final da URL
     };
   </script>
@@ -412,6 +413,25 @@
   <div class="sticky-cta esconder-sticky"><a class="btn cta" href="#">UNLOCK EVERYTHING →</a></div>
 
   <script>
+    // ---------- back-redirect: botão "voltar" leva para a oferta de $12 (mantém UTMs) ----------
+    (function () {
+      var target = window.PAGE_CONFIG.backRedirectUrl;
+      if (!target || !window.history || !history.pushState) return;
+      target += location.search;
+      function arm() { history.pushState({ br: 1 }, "", location.href); }
+      arm();
+      // o Chrome ignora entradas criadas sem interação: arma de novo no primeiro toque/clique
+      var armed = false;
+      function armOnGesture() {
+        if (armed) return;
+        armed = true;
+        arm();
+      }
+      document.addEventListener("pointerdown", armOnGesture, { once: true, capture: true });
+      document.addEventListener("keydown", armOnGesture, { once: true, capture: true });
+      window.addEventListener("popstate", function () { location.replace(target); });
+    })();
+
     (function () {
       var cfg = window.PAGE_CONFIG;
       document.getElementById("yr").textContent = new Date().getFullYear();
