@@ -236,12 +236,8 @@
     .faq details[open] summary::after { content: "–"; }
     .faq details p { padding: 0 16px 16px; color: var(--muted); font-size: 14px; }
 
-    /* footer */
-    footer {
-      border-top: 1px solid var(--line); margin-top: 24px;
-      padding: 28px 0 100px; text-align: center; font-size: 12px; color: var(--muted);
-    }
-    footer a { color: var(--muted); margin: 0 8px; }
+    /* espaço no fim da página para o botão fixo do celular */
+    main.wrap { padding-bottom: 100px; }
 
     /* sticky mobile cta */
     .sticky-cta {
@@ -371,10 +367,6 @@
       <a class="btn cta" href="#">UNLOCK EVERYTHING NOW →<small>One-time $19 · Lifetime access</small></a>
     </div>
 
-    <footer>
-      <p><a href="terms.html">Terms</a>·<a href="privacy.html">Privacy</a>·<a href="refund.html">Refunds</a></p>
-      <p style="margin-top:12px">© <span id="yr"></span> [BRAND]. All rights reserved.</p>
-    </footer>
   </main>
 
   <!-- sticky CTA (mobile) -->
@@ -402,7 +394,6 @@
 
     (function () {
       var cfg = window.PAGE_CONFIG;
-      document.getElementById("yr").textContent = new Date().getFullYear();
 
       // checkout links (mantém UTMs da URL)
       var url = cfg.checkoutUrl + (location.search && cfg.checkoutUrl.indexOf("?") === -1 ? location.search : "");
