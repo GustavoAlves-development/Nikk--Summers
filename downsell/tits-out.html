@@ -6,6 +6,16 @@
   <meta name="robots" content="noindex, nofollow">
   <title>Wait… don't go yet</title>
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%23ff3d7f' d='M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z'/%3E%3C/svg%3E">
+  <!-- Vturb: pré-carregamento do player -->
+  <script>!function(i,n){i._plt=i._plt||(n&&n.timeOrigin?n.timeOrigin+n.now():Date.now())}(window,performance);</script>
+  <link rel="preload" href="https://scripts.converteai.net/0c9bb92c-5d11-4b30-8c57-b67a39e8f481/players/6ac83fdc68585c97e35b0b3e/v4/player.js" as="script">
+  <link rel="preload" href="https://scripts.converteai.net/lib/js/smartplayer-wc/v4/smartplayer.js" as="script">
+  <link rel="preload" href="https://cdn.converteai.net/0c9bb92c-5d11-4b30-8c57-b67a39e8f481/6ac83fd774f07fa0f6ab862d/main.m3u8" as="fetch">
+  <link rel="dns-prefetch" href="https://cdn.converteai.net">
+  <link rel="dns-prefetch" href="https://scripts.converteai.net">
+  <link rel="dns-prefetch" href="https://images.converteai.net">
+  <link rel="dns-prefetch" href="https://license.vturb.com">
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,700&family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -106,7 +116,7 @@
            <vturb-smartplayer id="vid-XXXXXXXX" style="display:block;margin:0 auto;width:100%;"></vturb-smartplayer>
            <script type="text/javascript">var s=document.createElement("script");s.src="https://scripts.converteai.net/XXXX/players/XXXX/v4/player.js",s.async=!0,document.head.appendChild(s);</script>
       -->
-      <div class="video-placeholder">▶ Cole aqui o embed da Vturb</div>
+      <vturb-smartplayer id="vid-6ac83fdc68585c97e35b0b3e" style="display: block; margin: 0 auto; width: 100%; max-width: 400px;"><div class="vturb-player-placeholder" style="position: relative; width: 100%; padding: 177.77777777777777% 0 0; z-index: 0; background-color: black;"></div></vturb-smartplayer> <script type="text/javascript"> var s=document.createElement("script"); s.src="https://scripts.converteai.net/0c9bb92c-5d11-4b30-8c57-b67a39e8f481/players/6ac83fdc68585c97e35b0b3e/v4/player.js", s.async=!0,document.head.appendChild(s); </script>
       <!-- ====== FIM DO EMBED ====== -->
     </div>
     <p class="sound-hint">🔊 Turn your sound on, I have something to tell you</p>
@@ -138,16 +148,15 @@
       function hookVturb() {
         var player = document.querySelector("vturb-smartplayer");
         if (!player) return false;
-        player.addEventListener("player:ready", function () {
-          if (typeof player.displayHiddenElements === "function") {
-            player.displayHiddenElements(cfg.delaySeconds, [".esconder"], { persist: true });
-          }
-          // fallback: acompanha o tempo do vídeo
-          var iv = setInterval(function () {
-            var v = player.querySelector("video") || (player.shadowRoot && player.shadowRoot.querySelector("video"));
-            if (v && v.currentTime >= cfg.delaySeconds) { clearInterval(iv); reveal(); }
-          }, 1000);
-        });
+        // (a própria Vturb só conta o tempo assistido de verdade, ignorando o autoplay sem som)
+        var armed = false;
+        function arm() {
+          if (armed || typeof player.displayHiddenElements !== "function") return;
+          armed = true;
+          player.displayHiddenElements(cfg.delaySeconds, [".esconder"], { persist: false });
+        }
+        player.addEventListener("player:ready", arm);
+        arm(); // caso o player já esteja pronto
         // a vturb só tira o display:none; sincroniza com a nossa classe
         new MutationObserver(function () {
           var el = document.querySelector(".esconder");

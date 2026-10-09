@@ -138,16 +138,15 @@
       function hookVturb() {
         var player = document.querySelector("vturb-smartplayer");
         if (!player) return false;
-        player.addEventListener("player:ready", function () {
-          if (typeof player.displayHiddenElements === "function") {
-            player.displayHiddenElements(cfg.delaySeconds, [".esconder"], { persist: true });
-          }
-          // fallback: acompanha o tempo do vídeo
-          var iv = setInterval(function () {
-            var v = player.querySelector("video") || (player.shadowRoot && player.shadowRoot.querySelector("video"));
-            if (v && v.currentTime >= cfg.delaySeconds) { clearInterval(iv); reveal(); }
-          }, 1000);
-        });
+        // (a própria Vturb só conta o tempo assistido de verdade, ignorando o autoplay sem som)
+        var armed = false;
+        function arm() {
+          if (armed || typeof player.displayHiddenElements !== "function") return;
+          armed = true;
+          player.displayHiddenElements(cfg.delaySeconds, [".esconder"], { persist: false });
+        }
+        player.addEventListener("player:ready", arm);
+        arm(); // caso o player já esteja pronto
         // a vturb só tira o display:none; sincroniza com a nossa classe
         new MutationObserver(function () {
           var el = document.querySelector(".esconder");
