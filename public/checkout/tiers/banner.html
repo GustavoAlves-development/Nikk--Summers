@@ -1,0 +1,46 @@
+<!doctype html>
+<!-- Template do banner 1200x400. Parâmetros: i1,i2,i3 (imagens), y1,y2,y3 (offset px), b (início do blur), t (título), s (subtítulo) -->
+<html><head><meta charset="utf-8">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@1,700;1,800&family=Inter:wght@800;900&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; box-sizing: border-box; }
+  html, body { width: 1200px; height: 400px; overflow: hidden; background: #0d0609; }
+  .art { position: relative; width: 1200px; height: 400px; display: flex; }
+  .ph { width: 400px; height: 400px; background: center 0 / 400px auto no-repeat; }
+  .veil {
+    position: absolute; left: 0; right: 0; bottom: 0;
+    backdrop-filter: blur(26px) saturate(1.2); -webkit-backdrop-filter: blur(26px);
+    background: linear-gradient(180deg, rgba(255,61,127,.25), rgba(13,6,9,.8) 50%, #0d0609);
+    border-top: 2px solid rgba(255,122,168,.6);
+  }
+  .lock {
+    position: absolute; left: 50%; top: 0; transform: translate(-50%, -50%);
+    font: 900 14px/1 Inter, sans-serif; letter-spacing: .14em; color: #fff;
+    background: #ff3d7f; padding: 9px 16px; border-radius: 999px; white-space: nowrap;
+    box-shadow: 0 4px 18px rgba(255,61,127,.7);
+  }
+  .strip { position: absolute; left: 0; right: 0; bottom: 30px; text-align: center; }
+  .t { font-family: "Playfair Display", serif; font-style: italic; line-height: 1; }
+  .t .n { font-weight: 700; font-size: 40px; color: #fff; letter-spacing: .12em; margin-right: 16px; }
+  .t .u { font-weight: 800; font-size: 84px; color: #ff3d7f; text-shadow: 0 0 28px rgba(255,61,127,.75), 0 4px 0 #7a0f36; }
+  .sub { display: inline-block; margin-top: 12px; padding: 9px 22px; border-radius: 999px; font: 800 22px/1.1 Inter, sans-serif; color: #fff; background: rgba(255,61,127,.9); box-shadow: 0 6px 24px rgba(255,61,127,.55); }
+  .badge { position: absolute; top: 18px; left: 18px; font: 800 22px/1 Inter, sans-serif; color: #fff; background: #ff3d7f; padding: 9px 13px; border-radius: 10px; }
+</style></head>
+<body><div class="art">
+  <div class="ph" id="p1"></div><div class="ph" id="p2"></div><div class="ph" id="p3"></div>
+  <span class="badge">18+</span>
+  <div class="veil" id="v"><span class="lock">🔒 UNCENSORED INSIDE</span>
+    <div class="strip"><div class="t"><span class="n">NIKKI</span><span class="u" id="t"></span></div><div class="sub" id="s"></div></div>
+  </div>
+</div>
+<script>
+  var q = new URLSearchParams(location.search);
+  [1, 2, 3].forEach(function (k) {
+    var el = document.getElementById("p" + k);
+    el.style.backgroundImage = "url(../../img/" + q.get("i" + k) + ")";
+    el.style.backgroundPosition = "center " + q.get("y" + k) + "px";
+  });
+  document.getElementById("v").style.top = q.get("b") + "px";
+  document.getElementById("t").textContent = q.get("t");
+  document.getElementById("s").textContent = q.get("s");
+</script></body></html>
