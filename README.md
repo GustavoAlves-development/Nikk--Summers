@@ -22,14 +22,3 @@ npm run dev
 ```
 
 A prévia usa `http://127.0.0.1:3011` e procura uma porta seguinte se ela estiver ocupada. Produção: `npm run build` e `npm run start`.
-
-## Redirecionamento de visitantes da Meta
-
-`src/proxy.ts` confere o IP de quem acessa a rota `/` na API de IPs da Arise. Se a API identificar um IP da Meta e as duas variáveis estiverem configuradas, o proxy redireciona para `META_REDIRECT_URL` antes de entregar a página. Em falhas da consulta, visita local ou falta de configuração, a VSL segue normalmente.
-
-Configure no servidor:
-
-- `ARISE_META_IPS_TOKEN` — token da Arise, sem prefixo `NEXT_PUBLIC_`.
-- `META_REDIRECT_URL` — URL HTTPS do Human Frame App que receberá o redirecionamento.
-
-O destino segue pendente até o usuário enviar o endereço correto. `.env.example` mostra o formato; crie `.env.local` para desenvolvimento e configure as mesmas variáveis no provedor de hospedagem.
